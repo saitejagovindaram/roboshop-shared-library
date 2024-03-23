@@ -102,7 +102,7 @@ def call(Map configMap){
                     //     string(name: 'version', value: "${packageVersion}"), 
                     //     string(name: 'environment', value: 'dev')]
 
-                    build(job: "roboshop-dev/${configMap.component}-cd", parameters: [  // In groovy we can call a method like above as well, both will work.
+                    build(job: "../${configMap.component}-deploy", parameters: [  // In groovy we can call a method like above as well, both will work.
                         string(name: 'version', value: "${packageVersion}"), 
                         string(name: 'environment', value: 'dev')]);
                 }
