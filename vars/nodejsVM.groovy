@@ -11,7 +11,7 @@ def call(Map configMap){
             packageVersion = ''
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
-            NEXUS_URL = "54.90.61.194:8081"
+            NEXUS_URL = "172.31.53.164:8081"
             // NEXUS_URL = "${params.NexusURL}"
             NEXUS_REPOSITORY = "catalogue"
             NEXUS_CREDENTIAL_ID = 'nexus-auth'
