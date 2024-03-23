@@ -24,7 +24,7 @@ def call(Map configMap){
         }
         parameters{
             // string(name: 'NexusURL', defaultValue: '', description: 'what is the Nexux IP address')
-            booleanParam(name: 'Deploy', defaultValue: false, description: 'Want to deploy?')
+            booleanParam(name: 'deploy', defaultValue: false, description: 'Want to deploy?')
         }
         stages {
             stage('Get the version') {
@@ -94,7 +94,7 @@ def call(Map configMap){
             stage('Deploy'){
                 when {
                     expression { 
-                        params.deploy == true
+                       params.deploy == true
                     }
                 }   
                 steps{
