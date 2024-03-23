@@ -11,8 +11,8 @@ def call(Map configMap){
             packageVersion = ''
             NEXUS_VERSION = "nexus3"
             NEXUS_PROTOCOL = "http"
-            // NEXUS_URL = "172.31.20.124:8081"
-            NEXUS_URL = "${params.NexusURL}"
+            NEXUS_URL = "54.90.61.194:8081"
+            // NEXUS_URL = "${params.NexusURL}"
             NEXUS_REPOSITORY = "catalogue"
             NEXUS_CREDENTIAL_ID = 'nexus-auth'
         }
@@ -23,7 +23,7 @@ def call(Map configMap){
             ansiColor('xterm')
         }
         parameters{
-            string(name: 'NexusURL', defaultValue: '', description: 'what is the Nexux IP address')
+            // string(name: 'NexusURL', defaultValue: '', description: 'what is the Nexux IP address')
             booleanParam(name: 'Deploy', defaultValue: false, description: 'Want to deploy?')
         }
         stages {
