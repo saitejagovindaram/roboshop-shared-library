@@ -13,7 +13,7 @@ def call(Map configMap){
             NEXUS_PROTOCOL = "http"
             NEXUS_URL = "172.31.53.164:8081"
             // NEXUS_URL = "${params.NexusURL}"
-            NEXUS_REPOSITORY = "catalogue"
+            NEXUS_REPOSITORY = "${configMap.component}"
             NEXUS_CREDENTIAL_ID = 'nexus-auth'
         }
 
@@ -55,11 +55,11 @@ def call(Map configMap){
             }
             stage('Build'){
                 steps {
-                    sh '''
+                    sh """
                         ls -ltr
-                        zip -q -r catalogue.zip ./*
+                        zip -q -r ${configMap.component}.zip ./*
                         ls -ltr
-                    '''
+                    """
                 }
             }
 
@@ -76,9 +76,9 @@ def call(Map configMap){
                                 credentialsId: NEXUS_CREDENTIAL_ID,
                                 artifacts: [
                                     // Artifact generated such as .jar, .ear and .war files.
-                                    [artifactId: 'catalogue',
+                                    [artifactId: "${configMap.component}",
                                     classifier: '',
-                                    file: 'catalogue.zip',
+                                    file: "${configMap.component}.zip",
                                     type: 'zip'],
 
                                     // // Lets upload the pom.xml file for additional information for Transitive dependencies
@@ -102,7 +102,7 @@ def call(Map configMap){
                     //     string(name: 'version', value: "${packageVersion}"), 
                     //     string(name: 'environment', value: 'dev')]
 
-                    build(job: 'roboshop-dev/catalogue-cd', parameters: [  // In groovy we can call a method like above as well, both will work.
+                    build(job: "roboshop-dev/${configMap.component}-cd", parameters: [  // In groovy we can call a method like above as well, both will work.
                         string(name: 'version', value: "${packageVersion}"), 
                         string(name: 'environment', value: 'dev')]);
                 }
